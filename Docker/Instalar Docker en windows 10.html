@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+
+	<title>Instalando y probando Docker en Windows 10</title>
+	<meta name="description" content="" />
+
+	<link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css?v=c0b4b5268b">
+	<link rel="stylesheet" href="/assets/css/screen.css?v=c0b4b5268b">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+	<link rel="canonical" href="https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="En Mi Local Funciona" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Instalando y probando Docker en Windows 10" />
+    <meta property="og:description" content="Hoy en día, Docker se ha convertido en el estándar de facto en el uso de contenedores de software. En este artículo vamos a ver cómo podemos instalarlo en Windows 10, concretamente la versión Docker CE (Community Edition). &quot;Pero oye Santi, ¿no decían que Docker solo funcionaba en Linux?&quot;. Bueno," />
+    <meta property="og:url" content="https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/" />
+    <meta property="og:image" content="https://enmilocalfunciona.io/content/images/2018/01/perrete-windows-1.png" />
+    <meta property="article:published_time" content="2018-01-16T17:15:54.000Z" />
+    <meta property="article:modified_time" content="2018-01-16T17:15:54.000Z" />
+    <meta property="article:tag" content="Contenedores" />
+    <meta property="article:tag" content="Docker" />
+    <meta property="article:tag" content="Windows" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Instalando y probando Docker en Windows 10" />
+    <meta name="twitter:description" content="Hoy en día, Docker se ha convertido en el estándar de facto en el uso de contenedores de software. En este artículo vamos a ver cómo podemos instalarlo en Windows 10, concretamente la versión Docker CE (Community Edition). &quot;Pero oye Santi, ¿no decían que Docker solo funcionaba en Linux?&quot;. Bueno," />
+    <meta name="twitter:url" content="https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/" />
+    <meta name="twitter:image:src" content="https://enmilocalfunciona.io/content/images/2018/01/perrete-windows-1.png" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "En Mi Local Funciona",
+    "author": {
+        "@type": "Person",
+        "name": "Santi Macias",
+        "image": "https://enmilocalfunciona.io/content/images/2018/01/foto-2.PNG",
+        "url": "https://enmilocalfunciona.io/author/santi/",
+        "sameAs": "https://santimacnet.wordpress.com",
+        "description": "Líder Técnico Comunidad Microsoft en atSistemas, llevo trabajando con tecnologías y herramientas Microsoft desde el origen de los tiempos y soy un gran fan de pelis y series de ciencia ficción."
+    },
+    "headline": "Instalando y probando Docker en Windows 10",
+    "url": "https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/",
+    "datePublished": "2018-01-16T17:15:54.000Z",
+    "dateModified": "2018-01-16T17:15:54.000Z",
+    "image": "https://enmilocalfunciona.io/content/images/2018/01/perrete-windows-1.png",
+    "keywords": "Contenedores, Docker, Windows",
+    "description": "Hoy en día, Docker se ha convertido en el estándar de facto en el uso de contenedores de software. En este artículo vamos a ver cómo podemos instalarlo en Windows 10, concretamente la versión Docker CE (Community Edition). &quot;Pero oye Santi, ¿no decían que Docker solo funcionaba en Linux?&quot;. Bueno,"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="En Mi Local Funciona" href="https://enmilocalfunciona.io/rss/" />
+    <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61411083-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</head>
+<body class="post-template tag-contenedores tag-docker tag-windows">
+
+	
+
+<nav>
+	<div class="toggle-menu">
+	    <div id="icon">
+	        <div class="one"></div>
+	        <div class="two"></div>
+	        <div class="three"></div>
+	    </div>
+
+	    <div id="menu">
+	        <ul>
+	            <li>
+			<a href="http://twitter.com/enmilocalfun"><span><i class="fa fa-twitter"></i></span> Twitter</a>
+	            </li>
+	            <li>
+			<a href=""><span><i class="fa fa-github"></i></span> Github</a>
+	            </li>
+	            <li>
+			<a href="https://enmilocalfunciona.io/rss/"><span><i class="fa fa-rss"></i></span> RSS</a>
+	            </li>
+	        </ul>
+	    </div>
+	 </div>
+</nav>
+
+<header class="main-header " style="background-image: url(/content/images/2016/04/maxbanner.png)">
+	<figure class="logo">
+		<a href="https://enmilocalfunciona.io"><img class="img-logo" src="/content/images/2016/04/perfilblog-2.png" alt="Logo Blog"></a>
+	</figure>
+	<div class="title">
+		<a href="https://enmilocalfunciona.io">
+			<h1>En Mi Local Funciona</h1>
+		</a>
+		<p>Technical thoughts, stories and ideas</p>
+	</div>
+</header>
+
+<section class="posts">
+
+		<article class="post tag-contenedores tag-docker tag-windows">
+			<div class="inner">
+				<header class="header-post">
+					<span class="meta-post">
+								<figure class="avatar">
+									<img src="/content/images/2018/01/foto-2.PNG" alt="">
+								</figure>
+							<h2 class="title-post">Instalando y probando Docker en Windows 10</h2>
+							<p>Publicado por <a href="/author/santi/">Santi Macias</a> el <time class="post-date" datetime="2018-01-16">16 January 2018</time></p>
+							<p>   <span class="custom-tag"><a href="/tag/contenedores/">Contenedores</a></span><span class="custom-tag"><a href="/tag/docker/">Docker</a></span><span class="custom-tag"><a href="/tag/windows/">Windows</a> </p>
+					</span>
+				</header>
+
+				<section class="content-post">
+					<p>Hoy en día, <a href="https://es.wikipedia.org/wiki/Docker_(software)">Docker</a> se ha convertido en el estándar de facto en el uso de contenedores de software. En este artículo vamos a ver cómo podemos instalarlo en Windows 10, concretamente la versión Docker CE (Community Edition).</p>
+
+<p><img src="/content/images/2018/01/perrete-windows.png" alt="" /></p>
+
+<p><em>"Pero oye Santi, ¿no decían que Docker solo funcionaba en Linux?"</em>. Bueno, si revisamos los orígenes de Docker es cierto, se inició como proyecto bajo Kernel Linux, pero ahora ya no. Microsoft no quería quedarse fuera de esta tecnología y llega a un acuerdo con Docker en 2015 para convertirse en partner oficial y de esta forma, incorporar esta tecnología a sus sistemas operativos Windows Server 2016 y Windows 10 (aunque no en todas las versiones está soportado).</p>
+
+<p>Realmente, no es nada nuevo usar Docker en Windows. De hecho, podemos hacer funcionar Docker en Windows 7 y Windows 8 usando VirtualBox, la novedad ahora es que podemos usar Docker de forma nativa en Windows 10 sin necesidad de otras herramientas como <a href="https://docs.docker.com/toolbox/overview">Docker ToolBox</a>.</p>
+
+<p><img src="/content/images/2017/12/imagen-9.png" alt="alt" />
+<em>Captura de presentación Docker y sistemas soportados</em></p>
+
+<p>Microsoft se ha convertido en uno de los mayores contribuyentes de código en Docker y ha firmado acuerdos para garantizar que Docker se ejecute correctamente en sus sistemas operativos, ya sea, nativamente o usando Kernel Linux mediante virtualización (Hyper-V). Además, podemos llevarnos los contenedores a Azure con los servicios <a href="https://azure.microsoft.com/en-us/services/container-registry">ACR (Azure Container Registry)</a> para gestionar un registro privado y orquestación con soporte para Swarm, Kubernetes o Mesosphere DC/OS mediante <a href="https://azure.microsoft.com/en-us/services/container-service">AKS (Azure Container Service).</a></p>
+
+<p>Visual Studio 2017 también soporta contenedores Docker. Podemos crear aplicaciones .NET Core Dockerizadas directamente desde el IDE, ya que Visual Studio 2017 es capaz de generar las imágenes Docker y el Docker Compose de forma automática, pero eso, es un tema que veremos en otro post más adelante.</p>
+
+<p>Vamos al turrón, si queremos instalar Docker debemos cumplir ciertos requisitos en Windows 10: </p>
+
+<ul>  
+  <li>Windows 10 versión Professional o Enterprise.</li>
+  <li>Actualizado con Anniversary Edition o Creators Update.</li>
+  <li>Updates críticos para Windows Containers.</li>
+  <li>Compilación igual o superior a 14393.222.</li>
+ <li>Virtualización activada en nuestro equipo.</li>
+</ul>
+
+<p>En el caso de no tener virtualización activada, Docker detectará esta característica en el proceso de instalación y nos preguntará para instalarla de forma automática. Si queremos consultarlo, podemos vemos usando el “Task Manager”:</p>
+
+<p><img src="/content/images/2017/12/imagen-17.png" alt="alt" /></p>
+
+<h4 id="instalandodocker">Instalando Docker</h4>
+
+<p>El proceso de instalación de Docker en Windows 10, es bastante simple, lo primero es descargarlo desde aquí: <a href="https://store.docker.com/editions/community/docker-ce-desktop-windows">Descargar Docker</a></p>
+
+<p><img src="/content/images/2017/12/imagen-29.png" alt="alt" /></p>
+
+<p>Una vez descargado, ejecutamos el archivo y se lanzará el proceso de instalación como vemos en la imagen:</p>
+
+<p><img src="/content/images/2017/12/imagen-38.png" alt="alt" /></p>
+
+<p>Cuando finalice el proceso, aparecerá la ventana de instalación correcta, pulsaremos el botón de “Close and logout” para terminar de configurar Docker en nuestro Windows 10. En algunos casos, esto provocará que se reinicie el sistema Windows para terminar la configuración:</p>
+
+<p><img src="/content/images/2017/12/imagen-49.png" alt="alt" /></p>
+
+<p>Después de reiniciar nuestro Windows 10 ya tendremos Docker instalado en nuestro PC.</p>
+
+<p><img src="/content/images/2017/12/docker-status.png" height="230" width="120"> </p>
+
+<p>Como indicaba anteriormente, si no tenemos la virtualizacion activada, Docker nos preguntará para realizar el proceso automáticamente y reiniciará de nuevo nuestro Windows 10, este paso pueda tardar algún tiempo en completar todo el proceso y a veces no muestra ningún mensaje:</p>
+
+<p><img src="/content/images/2017/12/imagen-112.png" alt="alt" /></p>
+
+<p>Por último, una vez terminado el proceso anterior, ya estamos listos para utilizar Docker, Si pulsamos boton derecho sobre el icono de la barra de tareas veremos las opciones de Docker:</p>
+
+<p><img src="/content/images/2017/12/imagen-127.png" alt="alt" /></p>
+
+<p>Si ahora pulsamos en “Settings…” veremos la configuración inicial definida de Docker. Si queremos que Docker no arranque con nuestro Windows 10 lo podemos desmarcar aquí, el resto de opciones ya vienen configuradas y listas para funcionar.</p>
+
+<p><img src="/content/images/2017/12/imagen-137.png" alt="alt" /></p>
+
+<p>En la opción “Advanced”, veremos los ajustes por defecto que Docker reserva de forma dedicada para manejar sus imágenes y contenedores, también lo podemos cambiar si fuera necesario:</p>
+
+<p><img src="/content/images/2017/12/imagen-155.png" alt="alt" /></p>
+
+<p>Hay que recordar que Docker es una plataforma completa para trabajar con contenedores y al finalizar la instalación en nuestro PC disponemos de las siguientes herramientas:</p>
+
+<ul>  
+  <li>Docker Engine.</li>
+  <li>Docker Client.</li>
+  <li>Docker Compose.</li>
+  <li>Docker Machine.</li>
+</ul>
+
+<p>Con estos simples pasos, concluiríamos el proceso de instalación de Docker.</p>
+
+<h4 id="experimentandocondocker">Experimentando con Docker</h4>
+
+<p>Para trabajar con Docker y familiarizarnos con la herramienta, podemos usar la consola o PowerShell. En mi caso voy a utilizar la consola CMD para empezar a usar Docker, comentar que existen opciones como Kitematic o Portainer si estamos más cómodos trabajando con herramientas gráficas IU.</p>
+
+<p>Lo primero, es abrir la consola CMD y ver la lista de comandos disponibles de Docker:</p>
+
+<p><img src="/content/images/2017/12/imagen-156.png" alt="alt" /></p>
+
+<p>Nos mostrará la lista de comandos que podemos utilizar desde la consola, si queremos información detallada y ejemplos de uso, en la página oficial están todos documentados: <a href="https://docs.docker.com/engine/reference/commandline/docker/#child-commands">https://docs.docker.com/engine/reference/commandline/docker/#child-commands</a>.</p>
+
+<p><img src="/content/images/2017/12/imagen-158.png" alt="alt" /></p>
+
+<p>Para utilizar los comandos, escribiremos “docker [comando]”. Por ejemplo, vamos a consultar la versión de Docker instalada con “docker version”:</p>
+
+<p><img src="/content/images/2017/12/imagen-161.png" alt="alt" /></p>
+
+<h5 id="creandonuestracuentaendockerhub">Creando nuestra cuenta en Docker Hub</h5>
+
+<p>Aunque no es obligatorio, yo siempre recomiendo crear una cuenta <a href="https://hub.docker.com">Docker Hub</a> para no tener problemas más tarde a la hora de descargar imágenes, ya que, algunas nos pedirán nuestras credenciales para descargarse en nuestro PC:</p>
+
+<p><img src="/content/images/2017/12/imagen-165.png" alt="alt" /></p>
+
+<p>El proceso de registro es tan simple que no creo que sea necesario documentarlo: ir a la web de <a href="https://hub.docker.com">Docker Hub</a>, simplemente registrarse y activar la cuenta desde el enlace que llegará a vuestro email.</p>
+
+<h5 id="ejecutandonuestroprimercontainercondocker">Ejecutando nuestro primer container con Docker</h5>
+
+<p>El típico ejemplo en Docker consiste en ejecutar el contenedor “Hello World”. Para ello simplemente escribimos “docker run hello-world”. Como no tenemos la imagen previamente descargada, Docker es listo y se conecta al Hub para obtenerla y guardarla en nuestro PC. Después ejecuta el contenedor sobre la imagen descargada y finaliza el ciclo de vida del contenedor:</p>
+
+<p><img src="/content/images/2017/12/imagen-170.png" alt="alt" /></p>
+
+<p>Con este simple ejemplo, verificamos que aparece el mensaje “Hello from Docker” indicando que ha descargado la imagen y ejecutado el contenedor de forma correcta.</p>
+
+<p>Otro comando importante es “docker info”, que nos informa del estado actual de nuestro Docker: imágenes, contenedores, storage, CPU, memoria y mucha más información en pantalla que nos da una visión completa de todo: </p>
+
+<p><img src="/content/images/2017/12/imagen-173.png" alt="alt" /></p>
+
+<p>Algunos comandos básicos útiles de Docker son:</p>
+
+<ul>  
+  <li>docker images: para ver la lista de imágenes descargadas.</li>
+  <li>docker ps: para ver la lista de contenedores en ejecución.</li>
+  <li>docker ps -a: para ver la lista de todos los contenedores ejecutados.</li>
+ <li>docker rm: para borrar contenedores en nuestro equipo.</li>
+ <li>docker rmi: para borrar imagenes en nuestro equipo.</li>
+  <li>docker search: para buscar imágenes en el Docker Hub.</li>
+<li>docker pull: para descargar imágenes desde Docker Hub.</li>  
+</ul>
+
+<p>A partir de aquí, hemos visto cómo funciona Docker, evidentemente, de forma muy simple, con imágenes obtenidas desde el Docker Hub configuradas. Conforme vayáis conociendo Docker también aprenderéis a crear vuestras propias imágenes para publicarlas y optimizarlas en función de las necesidades de vuestros proyectos. En el portal de Docker está disponible toda la información como punto de partida recomendado: <a href="https://docs.docker.com/get-started">https://docs.docker.com/get-started</a></p>
+
+<p>Como conclusión, Docker da muchísimo juego para montarnos entornos de desarrollo, test y pruebas en nuestro propio equipo para después generar “contenedores entregables” y llevarlos a producción, aunque esta parte, ya no es tan trivial y se requiere experiencia y conocimientos DevOps.</p>
+
+<p>Sin más y esperando que os resulte interesante el artículo, desearos ¡¡Happy Docking!!. Y si te ha gustado, ¡síguenos en <a href="https://twitter.com/enmilocalfun">Twitter</a> para estar al día de más artículos!</p>
+				</section>
+
+				<footer class="footer-post">
+
+					<section class="author-post">
+							<figure class="avatar">
+								<img src="/content/images/2018/01/foto-2.PNG" alt="Santi Macias">
+							</figure>
+
+						<div class="bio">
+							<span>Autor</span>
+							<h4 class="author-name">
+								<a href="/author/santi/">Santi Macias</a>
+							</h4>
+								<p>Líder Técnico Comunidad Microsoft en atSistemas, llevo trabajando con tecnologías y herramientas Microsoft desde el origen de los tiempos y soy un gran fan de pelis y series de ciencia ficción.</p>
+						</div>
+					</section>
+
+					<section class="share">
+						<h4>Comparte</h4>
+						<a href="https://twitter.com/share?text=Instalando y probando Docker en Windows 10&url=https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/" class="fa fa-twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+							<span class="hidden">Twitter</span>
+						</a>
+
+						<a href="https://www.facebook.com/sharer/sharer.php?u=https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/" class="fa fa-facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+							<span class="hidden">Facebook</span>
+						</a>
+
+						<a href="https://plus.google.com/share?url=https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/" class="fa fa-google-plus" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+							<span class="hidden">Google+</span>
+						</a>
+
+                                                <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: es_ES</script>
+						<script type="IN/Share" data-url="https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/"></script>
+					</section>
+				</footer>
+
+				<section class="comments-post">
+					<!-- Disqus Comments -->
+<div id="disqus_thread"></div>
+<script>
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//enmilocalfunciona.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+					</section>
+
+			</div>
+		</article>
+	</section>
+
+
+	<footer class="blog-footer">
+		<div class="inner">
+			<div style="float:left;width:50%;margin-top: 18px">
+				<a href="/condiciones-uso">Condiciones de Uso</a>
+			</div>
+			<div style="float:right;width:50%">
+				<p>Powered by <a href="http://atsistemas.com">atSistemas</a></p>
+			</div>
+		</div>
+	</footer>
+
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+
+	<script>
+
+		//Menu Toggle
+		$("#icon").click(function() {
+		    $(this).toggleClass("active");
+	        $("#menu").fadeToggle();
+        });
+
+		//Code Highlighter
+        $(document).ready(function() {
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        //Google Analytics
+
+	</script>
+<script id="dsq-count-scr" src="//enmilocalfunciona.disqus.com/count.js" async></script>
+</body>
+</html>
